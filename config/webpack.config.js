@@ -71,6 +71,8 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.(less)$/;
+const lessModuleRegex = /\.module\.(less)$/;
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === "true") {
@@ -542,6 +544,48 @@ module.exports = function (webpackEnv) {
                 "sass-loader"
               ),
             },
+            // less 文件匹配
+            {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: [
+                {
+                  loader: "css-loader",
+                },
+                {
+                  loader: "less-loader",
+                  options: {
+                    javascriptEnabled: true,
+                  },
+                },
+                //全局引入公共的less 文件 需要安装 style-resources-loader 包
+                {
+                  loader: "style-resources-loader",
+                  options: {
+                    patterns: path.resolve(
+                      paths.appSrc,
+                      "assets/theme/var.less"
+                    ),
+                  },
+                },
+              ],
+              sideEffects: true,
+            },
+            {
+              test: lessModuleRegex,
+              use: [
+                {
+                  loader: "css-loader",
+                },
+                {
+                  loader: "less-loader",
+                  options: {
+                    javascriptEnabled: true,
+                  },
+                },
+              ],
+            },
+
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.

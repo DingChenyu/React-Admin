@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.css";
 
@@ -9,11 +9,11 @@ export default class Login extends Component {
   };
 
   // TODO:动态调整主题色
-  theme = () => {
-    window.less.modifyVars({
-      "@primary-color": "#000",
-    });
-  };
+  // theme = () => {
+  //   window.less.modifyVars({
+  //     "@primary-color": "#000",
+  //   });
+  // };
 
   render() {
     return (
@@ -24,7 +24,8 @@ export default class Login extends Component {
         </header>
         <section className="login-content">
           <span>用户登录</span>
-          <h6 onClick={this.theme}>主题色切换</h6>
+          {/* TODO:主题色切换 */}
+          {/* <h6 onClick={this.theme}>主题色切换</h6> */}
           <div className="login-form">
             <Form
               name="normal_login"
