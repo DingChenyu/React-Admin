@@ -7,6 +7,14 @@ export default class Login extends Component {
   onFinish = (value) => {
     console.log("Received values of form: ", value);
   };
+
+  // TODO:动态调整主题色
+  theme = () => {
+    window.less.modifyVars({
+      "@primary-color": "#000",
+    });
+  };
+
   render() {
     return (
       <div className="login">
@@ -16,6 +24,7 @@ export default class Login extends Component {
         </header>
         <section className="login-content">
           <span>用户登录</span>
+          <h6 onClick={this.theme}>主题色切换</h6>
           <div className="login-form">
             <Form
               name="normal_login"
