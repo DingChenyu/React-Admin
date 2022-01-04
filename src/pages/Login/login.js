@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.css";
+const axios = require("axios");
 
 export default class Login extends Component {
-  onFinish = (value) => {
-    console.log("Received values of form: ", value);
-  };
-
   // TODO:动态调整主题色
   // theme = () => {
   //   window.less.modifyVars({
@@ -15,12 +12,35 @@ export default class Login extends Component {
   //   });
   // };
 
+  onFinish = (value) => {
+    console.log(value);
+    const { username, password } = value;
+    console.log(username, password);
+    axios
+      .get("http://127.0.0.1:3000/server")
+      .then((res) => console.log(res.data))
+      .then((err) => console.log(err));
+  };
+
+  // TODO: validator验证password
+  // validatePwd = (rule, value, callback) => {
+  //   if (!value) {
+  //     callback("密码必须输入");
+  //   } else if (value.length < 4) {
+  //     callback("密码长度不能小于4位");
+  //   } else if (value.length > 12) {
+  //     callback("密码长度不能大于12位");
+  //   } else if (!/^.*(?=.{6,})(?=.*\d)(?=.*[a-z]).*$/.test(value)) {
+  //     callback("密码最少6位，包括至少1个小写字母，1个数字");
+  //   }
+  // };
+
   render() {
     return (
       <div className="login">
         <header className="login-header">
           <img src={require("./images/logo.png")} alt="logo" />
-          <span>react项目:后台管理系统</span>
+          <span>React项目:后台管理系统</span>
         </header>
         <section className="login-content">
           <span>用户登录</span>
@@ -30,9 +50,6 @@ export default class Login extends Component {
             <Form
               name="normal_login"
               className="login-form"
-              initialValues={{
-                remember: true,
-              }}
               onFinish={this.onFinish}
             >
               <Form.Item
@@ -40,7 +57,20 @@ export default class Login extends Component {
                 rules={[
                   {
                     required: true,
-                    message: "请输入用户名！",
+                    whitespace: true,
+                    message: "用户名必须输入",
+                  },
+                  {
+                    min: 4,
+                    message: "用户名至少4位",
+                  },
+                  {
+                    max: 12,
+                    message: "用户名最多12位",
+                  },
+                  {
+                    pattern: /^[a-zA-Z0-9_]+$/,
+                    message: "用户名必须是英文、数字或下划线组成",
                   },
                 ]}
               >
@@ -52,9 +82,26 @@ export default class Login extends Component {
               <Form.Item
                 name="password"
                 rules={[
+                  // TODO: validator验证
+                  // {
+                  //   validator: this.validatePwd,
+                  // },
                   {
                     required: true,
-                    message: "请输入密码！",
+                    whitespace: true,
+                    message: "密码必须输入",
+                  },
+                  {
+                    min: 4,
+                    message: "密码至少4位",
+                  },
+                  {
+                    max: 12,
+                    message: "密码最多12位",
+                  },
+                  {
+                    pattern: /^.*(?=.{6,})(?=.*\d)(?=.*[a-z]).*$/,
+                    message: "密码最少6位，包括至少1个小写字母，1个数字",
                   },
                 ]}
               >
