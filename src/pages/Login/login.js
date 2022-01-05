@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { reqLogin } from "../../api/index";
+import qs from "qs";
 import "./login.css";
-const axios = require("axios");
-
+import storgeUtils from "../../utils/storgeUtils";
+import { Redirect } from "react-router-dom";
 export default class Login extends Component {
   // TODO:动态调整主题色
   // theme = () => {
@@ -12,14 +14,27 @@ export default class Login extends Component {
   //   });
   // };
 
-  onFinish = (value) => {
-    console.log(value);
+  // 对表单进行检验
+  onFinish = async (value) => {
+    // 获取表单value值
     const { username, password } = value;
     console.log(username, password);
-    axios
-      .get("http://127.0.0.1:3000/server")
-      .then((res) => console.log(res.data))
-      .then((err) => console.log(err));
+    let userInfo = { username, password };
+    // 使后台可以接收到userInfo
+    const params = qs.stringify(userInfo);
+    // 异步请求——登录
+    const response = await reqLogin(params);
+    console.log("success!!", response);
+    const user = response.data;
+    if (response.status === 0) {
+      message.success("登录成功^_^");
+      // 全局存储数据 保存在local中
+      storgeUtils.saveUser(user);
+      // 跳转到管理页面(不需要再退回到登录页面)
+      this.props.history.replace("/Admin");
+    } else {
+      message.error("登录失败");
+    }
   };
 
   // TODO: validator验证password
@@ -36,6 +51,14 @@ export default class Login extends Component {
   // };
 
   render() {
+    // 判断用户是否登录
+    const user = storgeUtils.getUser();
+    console.log(user);
+    // 如果有用户信息 跳转到admin页面
+    if (user && user._id) {
+      return <Redirect to="/Admin" />;
+    }
+
     return (
       <div className="login">
         <header className="login-header">
