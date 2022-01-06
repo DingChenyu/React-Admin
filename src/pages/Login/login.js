@@ -62,7 +62,7 @@ export default class Login extends Component {
     return (
       <div className="login">
         <header className="login-header">
-          <img src={require("./images/logo.png")} alt="logo" />
+          <img src={require("../../assets/images/logo.png")} alt="logo" />
           <span>React项目:后台管理系统</span>
         </header>
         <section className="login-content">
