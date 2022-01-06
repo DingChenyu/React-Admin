@@ -22,7 +22,7 @@ export default class Admin extends Component {
     console.log("userInfo!!", user);
     // 如果有用户没有用户id 跳转到login页面
     if (!user || !user._id) {
-      return <Redirect to="/Login" />;
+      return <Redirect to="/login" />;
     }
     return (
       <Layout style={{ height: "100%" }}>
@@ -30,18 +30,19 @@ export default class Admin extends Component {
           <LeftNav />
         </Sider>
         <Layout>
-          <Header>Header</Header>
-          <Content style={{ backgroundColor: "#fff" }}>
+          <Header />
+          <Content style={{ backgroundColor: "#fff", margin: "20px" }}>
             <Switch>
-              <Route exact path="/Home" component={Home} />
-              <Route path="/Category" component={Category} />
-              <Route path="/Product" component={Product} />
-              <Route path="/Role" component={Role} />
-              <Route path="/User" component={User} />
-              <Route path="/Line" component={Line} />
-              <Route path="/Bar" component={Bar} />
-              <Route path="/Pie" component={Pie} />
-              <Redirect to="/Home" />
+              <Redirect exact={true} from="/" to="/home"></Redirect>
+              <Route path="/home" component={Home} />
+              <Route path="/category" component={Category} />
+              <Route path="/product" component={Product} />
+              <Route path="/role" component={Role} />
+              <Route path="/user" component={User} />
+              <Route path="/line" component={Line} />
+              <Route path="/bar" component={Bar} />
+              <Route path="/pie" component={Pie} />
+              <Redirect to="/home" />
             </Switch>
           </Content>
           <Footer style={{ textAlign: "center", color: "#aaa" }}>

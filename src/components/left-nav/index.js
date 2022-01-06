@@ -20,9 +20,9 @@ class LeftNav extends Component {
 
     // 防止刷新页面使默认选中项消失
     let isListOpen;
-    if (path === "/Category" || path === "/Product") {
+    if (path === "/category" || path === "/product") {
       isListOpen = "sub1";
-    } else if (path == "/Bar" || path === "/Line" || path === "/Pie") {
+    } else if (path == "/bar" || path === "/line" || path === "/pie") {
       isListOpen = "sub2";
     }
     return (
@@ -41,32 +41,32 @@ class LeftNav extends Component {
             mode="inline"
             theme="dark"
           >
-            <Menu.Item key="/Home" icon={<PieChartOutlined />}>
-              <Link to="/Home">首页</Link>
+            <Menu.Item key="/home" icon={<PieChartOutlined />}>
+              <Link to="/home">首页</Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<MailOutlined />} title="商品">
-              <Menu.Item key="/Category" icon={<PieChartOutlined />}>
-                <Link to="/Category">品类管理</Link>
+              <Menu.Item key="/category" icon={<PieChartOutlined />}>
+                <Link to="/category">品类管理</Link>
               </Menu.Item>
-              <Menu.Item key="/Product" icon={<PieChartOutlined />}>
-                <Link to="/Product">商品管理</Link>
+              <Menu.Item key="/product" icon={<PieChartOutlined />}>
+                <Link to="/product">商品管理</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="/User" icon={<PieChartOutlined />}>
-              <Link to="/User">用户管理</Link>
+            <Menu.Item key="/user" icon={<PieChartOutlined />}>
+              <Link to="/user">用户管理</Link>
             </Menu.Item>
-            <Menu.Item key="/Role" icon={<PieChartOutlined />}>
-              <Link to="/Role">角色管理</Link>
+            <Menu.Item key="/role" icon={<PieChartOutlined />}>
+              <Link to="/role">角色管理</Link>
             </Menu.Item>
             <SubMenu key="sub2" icon={<MailOutlined />} title="图形图表">
-              <Menu.Item key="/Bar" icon={<PieChartOutlined />}>
-                <Link to="/Bar">柱形图</Link>
+              <Menu.Item key="/bar" icon={<PieChartOutlined />}>
+                <Link to="/bar">柱形图</Link>
               </Menu.Item>
-              <Menu.Item key="/Line" icon={<PieChartOutlined />}>
-                <Link to="/Line">折线图</Link>
+              <Menu.Item key="/line" icon={<PieChartOutlined />}>
+                <Link to="/line">折线图</Link>
               </Menu.Item>
-              <Menu.Item key="/Pie" icon={<PieChartOutlined />}>
-                <Link to="/Pie">饼图</Link>
+              <Menu.Item key="/pie" icon={<PieChartOutlined />}>
+                <Link to="/pie">饼图</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Form, Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { reqLogin } from "../../api/index";
 import qs from "qs";
 import "./login.css";
 import storgeUtils from "../../utils/storgeUtils";
 import { Redirect } from "react-router-dom";
+import { reqLogin } from "../../api/index";
 export default class Login extends Component {
   // TODO:动态调整主题色
   // theme = () => {
@@ -15,26 +15,30 @@ export default class Login extends Component {
   // };
 
   // 对表单进行检验
-  onFinish = async (value) => {
+  onFinish = (value) => {
     // 获取表单value值
     const { username, password } = value;
-    console.log(username, password);
     let userInfo = { username, password };
     // 使后台可以接收到userInfo
     const params = qs.stringify(userInfo);
     // 异步请求——登录
-    const response = await reqLogin(params);
-    console.log("success!!", response);
-    const user = response.data;
-    if (response.status === 0) {
-      message.success("登录成功^_^");
-      // 全局存储数据 保存在local中
-      storgeUtils.saveUser(user);
-      // 跳转到管理页面(不需要再退回到登录页面)
-      this.props.history.replace("/Admin");
-    } else {
-      message.error("登录失败");
-    }
+    reqLogin(params)
+      .then((response) => {
+        console.log(response);
+        const user = response.data.data;
+        if (response.data.status === 0) {
+          message.success("登录成功^_^");
+          // 全局存储数据 保存在local中
+          storgeUtils.saveUser(user);
+          // 跳转到管理页面(不需要再退回到登录页面)
+          this.props.history.replace("/");
+        } else {
+          message.error("登录失败");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // TODO: validator验证password
@@ -56,7 +60,7 @@ export default class Login extends Component {
     console.log(user);
     // 如果有用户信息 跳转到admin页面
     if (user && user._id) {
-      return <Redirect to="/Admin" />;
+      return <Redirect to="/" />;
     }
 
     return (
