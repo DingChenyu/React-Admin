@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
-import {
-  AppstoreOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+import { PieChartOutlined, MailOutlined } from "@ant-design/icons";
 import { Link, withRouter } from "react-router-dom";
 import "./index.css";
 
@@ -16,13 +10,12 @@ class LeftNav extends Component {
 
     // 获取当前请求的路由路径
     const path = this.props.location.pathname;
-    console.log(path);
 
     // 防止刷新页面使默认选中项消失
     let isListOpen;
     if (path === "/category" || path === "/product") {
       isListOpen = "sub1";
-    } else if (path == "/bar" || path === "/line" || path === "/pie") {
+    } else if (path === "/bar" || path === "/line" || path === "/pie") {
       isListOpen = "sub2";
     }
     return (
@@ -66,7 +59,7 @@ class LeftNav extends Component {
                 <Link to="/line">折线图</Link>
               </Menu.Item>
               <Menu.Item key="/pie" icon={<PieChartOutlined />}>
-                <Link to="/pie">饼图</Link>
+                <Link to="/pie">饼状图</Link>
               </Menu.Item>
             </SubMenu>
           </Menu>
