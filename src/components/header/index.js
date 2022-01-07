@@ -20,19 +20,10 @@ class Header extends Component {
     this.setState = () => false;
   }
 
-  // 1s更新一次时间
-  getTime = () => {
-    this.intervalId = setInterval(() => {
-      const currentTime = moment().format("YYYY-MM-DD, h:mm:ss");
-      this.setState({ currentTime });
-    }, 1000);
-  };
-
-  componentDidMount() {
-    // 获取天气信息
+  // 获取天气信息
+  getWeather = () => {
     researchWeather("重庆")
       .then((response) => {
-        console.log("success!!", response.data.lives);
         let weatherList = response.data.lives;
         weatherList.forEach((item) => {
           console.log(item);
@@ -45,17 +36,28 @@ class Header extends Component {
       .catch((err) => {
         console.log(err);
       });
+  };
 
-    // 获取当前时间
-    this.getTime();
-    // 获取当前标题
-  }
+  // 1s更新一次时间
+  getTime = () => {
+    this.intervalId = setInterval(() => {
+      const currentTime = moment().format("YYYY-MM-DD, h:mm:ss");
+      this.setState({ currentTime });
+    }, 1000);
+  };
 
   // 退出登录 删除local存储的user信息
   quit = () => {
     storgeUtils.removeUser();
     this.props.history.replace("/login");
   };
+
+  componentDidMount() {
+    // 获取天气信息
+    this.getWeather();
+    // 获取当前时间
+    this.getTime();
+  }
 
   // 组件卸载
   componentWillUnmount() {

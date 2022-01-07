@@ -11,7 +11,8 @@ export const reqLogin = (username, password) =>
   ajax(conf + "/login", { username, password }, "POST");
 
 // 添加用户
-export const reqAddUser = (user) => ajax("/manage/user/add", { user }, "POST");
+export const reqAddUser = (user) =>
+  ajax(conf + "/manage/user/add", { user }, "POST");
 
 // 查询天气
 export const researchWeather = (city) =>
@@ -20,3 +21,15 @@ export const researchWeather = (city) =>
     { city },
     "GET"
   );
+
+// 获取一级/二级分类的列表
+export const reqCategorys = (parentId) =>
+  ajax(conf + "/manage/category/list", { parentId }, "GET");
+
+// 添加分类
+export const reqAddCategory = (parentId, categoryName) =>
+  ajax(conf + "/manage/category/add", { parentId, categoryName }, "POST");
+
+// 更新分类
+export const reqUpdateCategory = (categoryId, categoryName) =>
+  ajax(conf + "/manage/category/update", { categoryId, categoryName }, "POST");
