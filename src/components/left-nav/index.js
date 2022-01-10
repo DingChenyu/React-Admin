@@ -10,14 +10,28 @@ class LeftNav extends Component {
 
     // 获取当前请求的路由路径
     const path = this.props.location.pathname;
+    console.log(path);
 
     // 防止刷新页面使默认选中项消失
-    let isListOpen;
-    if (path === "/category" || path === "/product") {
+    let isListOpen, productPath;
+    if (
+      path === "/category" ||
+      path === "/product" ||
+      path === "/product/addupdate" ||
+      path === "/product/detail"
+    ) {
       isListOpen = "sub1";
     } else if (path === "/bar" || path === "/line" || path === "/pie") {
       isListOpen = "sub2";
     }
+    if (
+      path === "/product" ||
+      path === "/product/addupdate" ||
+      path === "/product/detail"
+    ) {
+      productPath = path;
+    }
+
     return (
       <div className="left-nav">
         <Link to="/">
@@ -41,7 +55,7 @@ class LeftNav extends Component {
               <Menu.Item key="/category" icon={<PieChartOutlined />}>
                 <Link to="/category">品类管理</Link>
               </Menu.Item>
-              <Menu.Item key="/product" icon={<PieChartOutlined />}>
+              <Menu.Item key={productPath} icon={<PieChartOutlined />}>
                 <Link to="/product">商品管理</Link>
               </Menu.Item>
             </SubMenu>

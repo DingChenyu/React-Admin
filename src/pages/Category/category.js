@@ -99,11 +99,7 @@ export default class Category extends Component {
     );
 
     return (
-      <Card
-        title={title}
-        extra={extra}
-        style={{ width: "100%", height: "100%" }}
-      >
+      <Card title={title} extra={extra} style={{ width: "100%" }}>
         <Table
           dataSource={categorys}
           columns={this.columns}

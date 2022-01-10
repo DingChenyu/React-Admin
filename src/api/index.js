@@ -33,3 +33,15 @@ export const reqAddCategory = (parentId, categoryName) =>
 // 更新分类
 export const reqUpdateCategory = (categoryId, categoryName) =>
   ajax(conf + "/manage/category/update", { categoryId, categoryName }, "POST");
+
+// 商品分类列表
+export const reqProducts = (pageNum, pageSize) =>
+  ajax(conf + "/manage/product/list", { pageNum, pageSize }, "GET");
+
+// 搜索商品（名称）
+export const reqSearchName = () =>
+  ajax(conf + "/manage/product/searchname", {}, "GET");
+
+// 搜索商品（描述）
+export const reqSearchType = () =>
+  ajax(conf + "/manage/product/searchtype", {}, "GET");

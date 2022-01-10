@@ -25,7 +25,8 @@ export default class Admin extends Component {
       return <Redirect to="/login" />;
     }
     return (
-      <Layout style={{ height: "100%" }}>
+      //TODO: 使用minHeight解决了height不能高度自适应的问题
+      <Layout style={{ minHeight: "100%" }}>
         <Sider>
           <LeftNav />
         </Sider>
