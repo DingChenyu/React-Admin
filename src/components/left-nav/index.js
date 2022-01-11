@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
-import { PieChartOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  PieChartOutlined,
+  DesktopOutlined,
+  ContainerOutlined,
+  MailOutlined,
+} from "@ant-design/icons";
 import { Link, withRouter } from "react-router-dom";
 import "./index.css";
 
@@ -52,17 +60,17 @@ class LeftNav extends Component {
               <Link to="/home">首页</Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<MailOutlined />} title="商品">
-              <Menu.Item key="/category" icon={<PieChartOutlined />}>
+              <Menu.Item key="/category" icon={<MenuFoldOutlined />}>
                 <Link to="/category">品类管理</Link>
               </Menu.Item>
-              <Menu.Item key={productPath} icon={<PieChartOutlined />}>
+              <Menu.Item key={productPath} icon={<MenuUnfoldOutlined />}>
                 <Link to="/product">商品管理</Link>
               </Menu.Item>
             </SubMenu>
-            <Menu.Item key="/user" icon={<PieChartOutlined />}>
+            <Menu.Item key="/user" icon={<AppstoreOutlined />}>
               <Link to="/user">用户管理</Link>
             </Menu.Item>
-            <Menu.Item key="/role" icon={<PieChartOutlined />}>
+            <Menu.Item key="/role" icon={<DesktopOutlined />}>
               <Link to="/role">角色管理</Link>
             </Menu.Item>
             <SubMenu key="sub2" icon={<MailOutlined />} title="图形图表">
@@ -72,7 +80,7 @@ class LeftNav extends Component {
               <Menu.Item key="/line" icon={<PieChartOutlined />}>
                 <Link to="/line">折线图</Link>
               </Menu.Item>
-              <Menu.Item key="/pie" icon={<PieChartOutlined />}>
+              <Menu.Item key="/pie" icon={<ContainerOutlined />}>
                 <Link to="/pie">饼状图</Link>
               </Menu.Item>
             </SubMenu>
