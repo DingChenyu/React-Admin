@@ -5,6 +5,7 @@ import {
   PlusOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
+import RichTextEditor from "./richTextEditor";
 const { Item } = Form;
 const { TextArea } = Input;
 
@@ -153,8 +154,8 @@ export default class AddUpdate extends Component {
               )}
             </Upload>
           </Item>
-          <Item label="商品详情">
-            <Input type="number" placeholder="请输入商品价格" addonAfter="元" />
+          <Item label="商品详情" wrapperCol={{ span: 20 }}>
+            <RichTextEditor />
           </Item>
           <Item>
             <Button type="primary">提交</Button>
