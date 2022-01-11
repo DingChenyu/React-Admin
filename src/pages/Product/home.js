@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { Card, Select, Input, Button, Table, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { reqProducts, reqSearchName, reqSearchType } from "../../api/index";
+import { changeCountFun } from "../../redux/actions/countReducer";
+import { connect } from "react-redux";
 const { Option } = Select;
 
-export default class ProductHome extends Component {
+class ProductHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,10 +98,20 @@ export default class ProductHome extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.count);
     //获取商品列表
     this.getreqProducts();
     //初始化列的数据
     this.initColumns();
+    // test redux
+    this.props
+      .dispatch(changeCountFun())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // 按照类型搜索关键字查找商品列表
@@ -193,3 +205,9 @@ export default class ProductHome extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  count: state.itemState.count,
+});
+
+export default connect(mapStateToProps)(ProductHome);
