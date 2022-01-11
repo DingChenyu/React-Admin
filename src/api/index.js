@@ -48,3 +48,6 @@ export const reqSearchType = () =>
 
 // 获取角色列表
 export const reqRoleList = () => ajax(conf + "/manage/role/list", {}, "GET");
+
+// 获取用户列表
+export const reqUsersList = () => ajax(conf + "/manage/user/list", {}, "GET");

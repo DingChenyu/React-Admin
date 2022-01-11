@@ -94,7 +94,14 @@ export default class Role extends Component {
           rowKey="_id"
           loading={isLoading}
           pagination={{ defaultPageSize: 3, showQuickJumper: true }}
-          rowSelection={{ type: "radio", selectedRowKeys: [role._id] }}
+          rowSelection={{
+            type: "radio",
+            selectedRowKeys: [role._id],
+            //使radio按钮可选中
+            rowSelection: (role) => {
+              this.setState({ role });
+            },
+          }}
           onRow={this.onRow}
         />
         <Modal

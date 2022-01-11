@@ -182,7 +182,12 @@ export default class ProductHome extends Component {
           bordered
           rowKey="_id"
           loading={isLoading}
-          pagination={{ defaultPageSize: 3, showQuickJumper: true }}
+          pagination={{
+            defaultPageSize: 3,
+            showQuickJumper: true,
+            //指定特定的页码
+            // current: this.page,
+          }}
         />
       </Card>
     );
