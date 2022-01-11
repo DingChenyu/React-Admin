@@ -45,3 +45,6 @@ export const reqSearchName = () =>
 // 搜索商品（描述）
 export const reqSearchType = () =>
   ajax(conf + "/manage/product/searchtype", {}, "GET");
+
+// 获取角色列表
+export const reqRoleList = () => ajax(conf + "/manage/role/list", {}, "GET");
